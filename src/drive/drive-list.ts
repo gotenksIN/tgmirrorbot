@@ -85,12 +85,11 @@ function generateFilesListMessage (files:any[]): string {
     for (var i = 0; i < files.length; i++) {
       message += '<a href = \'' + files[i]['url'] + '\'>' + files[i]['name'] + '</a>';
       if (files[i]['size'])
-        message += ' (' + dlUtils.formatSize(files[i]['size']) + ')\n';
+        message += ' (' + dlUtils.formatSize(files[i]['size']) + ') | ' + '<a href =  "' + constants.CLOUDFLARE_INDEX + files[i]['name'] + '">' + 'Cloudflare Link' + '</a>'+'\n';
       else if (files[i]['mimeType'] === 'application/vnd.google-apps.folder')
-        message += ' (folder)\n';
+        message += ' (folder) | '+ '<a href = "' + constants.CLOUDFLARE_INDEX + files[i]['name'] + '/' + '">' + 'Cloudflare Link' + '</a>' + '\n';
       else
-      message += '\n';
-
+        message += '\n';
     }
   } else {
     message = 'There are no files matching your parameters';

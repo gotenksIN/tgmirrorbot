@@ -570,9 +570,14 @@ function driveUploadCompleteCallback(err: string, gid: string, url: string, file
     console.log(`${gid}: Uploaded `);
     if (fileSize) {
       var fileSizeStr = downloadUtils.formatSize(fileSize);
-      finalMessage = `<a href='${url}'>${fileName}</a> (${fileSizeStr})`;
+      if(url.indexOf("/folders/") > -1){
+        var indexUrl = constants.CLOUDFLARE_INDEX + fileName + '/';
+      }else{
+        var indexUrl = constants.CLOUDFLARE_INDEX + fileName ;
+      }
+      finalMessage = `<a href='${url}'>${fileName}</a> (${fileSizeStr}) \n<a href="${indexUrl}">Cloudflare Link</a>`;
     } else {
-      finalMessage = `<a href='${url}'>${fileName}</a>`;
+      finalMessage = `<a href='${url}'>${fileName}</a> \n<a href="${indexUrl}">Cloudflare Link</a>`;
     }
     if (constants.IS_TEAM_DRIVE && isFolder) {
       finalMessage += '\n\n<i>Folders in Shared Drives can only be shared with members of the drive. Mirror as an archive if you need public links.</i>';
