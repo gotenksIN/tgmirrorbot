@@ -66,7 +66,7 @@ function generateSearchQuery (fileName:string, parent:string): string {
   } else {
     q += 'name contains \'' + fileName + '\'';
   }
-  q += ')';
+  q += ') and trashed = false';
   return q;
 }
 
